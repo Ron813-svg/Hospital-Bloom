@@ -7,16 +7,177 @@
     tools:context=".ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/aboreto"
+        android:text="Ingrese un Paciente"
+        android:textSize="24sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/txtNombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Nombre Completo"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtTipoSangre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/txtTipoSangre"
+        android:layout_width="342dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Tipo de Sangre"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtTelefono"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+
+    <EditText
+        android:id="@+id/txtTelefono"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Telefono"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtEnfermedad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoSangre" />
+
+    <EditText
+        android:id="@+id/txtEnfermedad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Enfermedad"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtNumHabitacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefono" />
+
+    <EditText
+        android:id="@+id/txtNumHabitacion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Numero de habitacion"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtNumCama"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnfermedad" />
+
+    <EditText
+        android:id="@+id/txtNumCama"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Numero de cama"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtMedicamentos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNumHabitacion" />
+
+    <EditText
+        android:id="@+id/txtMedicamentos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Medicamentos asignados"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtFechaNacimiento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNumCama" />
+
+    <EditText
+        android:id="@+id/txtFechaNacimiento"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Fecha de nacimiento"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtHoraAplicacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMedicamentos" />
+
+    <EditText
+        android:id="@+id/txtHoraAplicacion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="63dp"
+        android:background="@drawable/editextselector"
+        android:ems="10"
+        android:hint="Hora de aplicacion de los medicamentos"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/btnIngresar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaNacimiento" />
+
+    <Button
+        android:id="@+id/btnIngresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="43dp"
+        android:background="@drawable/button_mode"
+        android:layout_marginBottom="83dp"
+        android:text="Ingresar el Paciente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHoraAplicacion" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
