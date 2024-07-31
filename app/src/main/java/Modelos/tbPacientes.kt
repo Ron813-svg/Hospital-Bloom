@@ -1,7 +1,6 @@
 package Modelos
 
 data class tbPacientes(
-    val idPaciente: Int,
     val nombrePaciente: String,
     val tipoSangrePaciente: String,
     val telefonoPaciente: String,

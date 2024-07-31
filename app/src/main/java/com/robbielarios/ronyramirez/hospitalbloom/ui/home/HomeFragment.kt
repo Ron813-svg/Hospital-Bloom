@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import Modelos.Conexion
+import Modelos.tbPacientes
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
 import android.widget.TextView
@@ -17,21 +18,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import viewModel.SharedViewModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -64,6 +64,19 @@ class HomeFragment : Fragment() {
 
                 withContext(Dispatchers.Main){
                     Toast.makeText(context, "Paciente Agregado", Toast.LENGTH_SHORT).show()
+                    val newPaciente = tbPacientes(
+                        txtNombre.text.toString(),
+                        txtTipoSangre.text.toString(),
+                        txtTelefono.text.toString(),
+                        txtEnfermedad.text.toString(),
+                        txtNumHabitacion.text.toString(),
+                        txtNumCama.text.toString(),
+                        txtMedicamentos.text.toString(),
+                        txtFechaNacimiento.text.toString(),
+                        txtHoraAplicacion.text.toString()
+                    )
+                    sharedViewModel.addPaciente(newPaciente)
+
                     txtNombre.setText("")
                     txtTipoSangre.setText("")
                     txtTelefono.setText("")
@@ -74,7 +87,6 @@ class HomeFragment : Fragment() {
                     txtFechaNacimiento.setText("")
                     txtHoraAplicacion.setText("")
                 }
-
             }
         }
 
@@ -85,5 +97,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
