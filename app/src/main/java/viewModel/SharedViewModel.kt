@@ -28,6 +28,7 @@ class SharedViewModel : ViewModel() {
                 val result = query.executeQuery("select * from pacientes")
 
                 while (result.next()) {
+                    val uuid = result.getString("UUID")
                     val nombre = result.getString("Nombre")
                     val tipoSangre = result.getString("TSangre")
                     val telefono = result.getString("Telefono")
@@ -38,7 +39,7 @@ class SharedViewModel : ViewModel() {
                     val fechaNacimiento = result.getString("FechaNac")
                     val horaAplicacion = result.getString("HoraMedicacion")
 
-                    val allValues = tbPacientes(nombre, tipoSangre, telefono, enfermedad, numHabitacion, numCama, medicamentos, fechaNacimiento, horaAplicacion)
+                    val allValues = tbPacientes(uuid, nombre, tipoSangre, telefono, enfermedad, numHabitacion, numCama, medicamentos, fechaNacimiento, horaAplicacion)
                     listaPacientes.add(allValues)
                 }
 

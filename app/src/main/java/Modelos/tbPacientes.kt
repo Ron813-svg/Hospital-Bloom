@@ -1,6 +1,7 @@
 package Modelos
 
 data class tbPacientes(
+    val uuid: String,
     val nombrePaciente: String,
     val tipoSangrePaciente: String,
     val telefonoPaciente: String,

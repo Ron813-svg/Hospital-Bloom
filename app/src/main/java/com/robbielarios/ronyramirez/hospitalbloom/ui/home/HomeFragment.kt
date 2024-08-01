@@ -50,21 +50,26 @@ class HomeFragment : Fragment() {
         btnAdd.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val objConnection = Conexion().cadenaConexion()
-                val AddPaciente = objConnection?.prepareStatement("INSERT INTO pacientes (Nombre, TSangre, Telefono, Enfermedad, NumCama, NumHabitacion, Medicamento, FechaNac, HoraMedicacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")!!
-                AddPaciente.setString(1, txtNombre.text.toString())
-                AddPaciente.setString(2, txtTipoSangre.text.toString())
-                AddPaciente.setString(3, txtTelefono.text.toString())
-                AddPaciente.setString(4, txtEnfermedad.text.toString())
-                AddPaciente.setString(5, txtNumCama.text.toString())
-                AddPaciente.setString(6, txtNumHabitacion.text.toString())
-                AddPaciente.setString(7, txtMedicamentos.text.toString())
-                AddPaciente.setString(8, txtFechaNacimiento.text.toString())
-                AddPaciente.setString(9, txtHoraAplicacion.text.toString())
+                val AddPaciente = objConnection?.prepareStatement(
+                    "INSERT INTO pacientes (uuid, Nombre, TSangre, Telefono, Enfermedad, NumCama, NumHabitacion, Medicamento, FechaNac, HoraMedicacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                )!!
+                val uuid = java.util.UUID.randomUUID().toString()
+                AddPaciente.setString(1, uuid)
+                AddPaciente.setString(2, txtNombre.text.toString())
+                AddPaciente.setString(3, txtTipoSangre.text.toString())
+                AddPaciente.setString(4, txtTelefono.text.toString())
+                AddPaciente.setString(5, txtEnfermedad.text.toString())
+                AddPaciente.setString(6, txtNumCama.text.toString())
+                AddPaciente.setString(7, txtNumHabitacion.text.toString())
+                AddPaciente.setString(8, txtMedicamentos.text.toString())
+                AddPaciente.setString(9, txtFechaNacimiento.text.toString())
+                AddPaciente.setString(10, txtHoraAplicacion.text.toString())
                 AddPaciente.executeUpdate()
 
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     Toast.makeText(context, "Paciente Agregado", Toast.LENGTH_SHORT).show()
                     val newPaciente = tbPacientes(
+                        uuid,
                         txtNombre.text.toString(),
                         txtTipoSangre.text.toString(),
                         txtTelefono.text.toString(),
@@ -89,6 +94,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
 
         return root
     }
