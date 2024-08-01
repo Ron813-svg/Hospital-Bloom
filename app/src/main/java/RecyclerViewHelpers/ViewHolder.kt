@@ -8,7 +8,9 @@ import com.robbielarios.ronyramirez.hospitalbloom.R
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
    val title: TextView = view.findViewById(R.id.txtTituloCard)
-   val image: ImageView = view.findViewById(R.id.imgBorrar)
+   val imgBorrar: ImageView = view.findViewById(R.id.imgBorrar)
+   val imgEditar: ImageView = view.findViewById(R.id.imgActualizar)
+
 
 
 }

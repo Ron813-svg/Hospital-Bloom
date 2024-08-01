@@ -29,6 +29,12 @@
                 android:textSize="28sp" />
 
             <ImageView
+                android:id="@+id/imgActualizar"
+                android:layout_width="36dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/baseline_update_24" />
+
+            <ImageView
                 android:id="@+id/imgBorrar"
                 android:layout_width="36dp"
                 android:layout_height="match_parent"
