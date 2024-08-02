@@ -113,17 +113,17 @@ class Adaptador(private var Data: List<tbPacientes>): RecyclerView.Adapter<ViewH
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
                 putString("Nombre", item.nombrePaciente)
-                putString("tipo_sangre", item.tipoSangrePaciente)
-                putString("telefono", item.telefonoPaciente)
-                putString("enfermedad", item.enfermedadPaciente)
-                putString("fecha_nacimiento", item.fechaNacimientoPaciente)
-                putString("hora_medicacion", item.horaAplicacionPaciente)
-                putString("numero_habitacion", item.numHabitacionPaciente)
-                putString("numero_cama", item.numCamaPaciente)
-                putString("medicamentos", item.medicamentosPaciente)
+                putString("TSangre", item.tipoSangrePaciente)
+                putString("Telefono", item.telefonoPaciente)
+                putString("Enfermedad", item.enfermedadPaciente)
+                putString("NumHabitacion", item.numHabitacionPaciente)
+                putString("NumCama", item.numCamaPaciente)
+                putString("Medicamento", item.medicamentosPaciente)
+                putString("FechaNac", item.fechaNacimientoPaciente)
+                putString("HoraMedicacion", item.horaAplicacionPaciente)
             }
             val navController = findNavController(holder.itemView)
-            navController.navigate(R.id.navigation_dashboard, bundle)
+            navController.navigate(R.id.detalles2, bundle)
         }
     }
     private fun findNavController(view: View): NavController {
