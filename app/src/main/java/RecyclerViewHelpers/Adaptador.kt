@@ -3,14 +3,22 @@ package RecyclerViewHelpers
 import Modelos.Conexion
 import Modelos.tbPacientes
 import android.app.AlertDialog
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.robbielarios.ronyramirez.hospitalbloom.R
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Adaptador(private var Data: List<tbPacientes>): RecyclerView.Adapter<ViewHolder>() {
 
@@ -19,62 +27,108 @@ class Adaptador(private var Data: List<tbPacientes>): RecyclerView.Adapter<ViewH
         return ViewHolder(view)
     }
 
+    fun ActualizarListaDespuesDeEditar(uuid: String, nuevoNombre: String){
+        val Index = Data.indexOfFirst { it.uuid == uuid }
+        Data[Index].nombrePaciente = nuevoNombre
+        notifyItemChanged(Index)
+    }
+
     override fun getItemCount() = Data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = Data[position]
         holder.title.text = item.nombrePaciente
 
-        //Todo: clic al icono de borrar
         holder.imgBorrar.setOnClickListener {
 
-            //Creo la alerta para confirmar la eliminacion
-            //1- Invoco el contexto
+
             val context = holder.itemView.context
-            //2- Creo la alerta
-            // [Usando los tres pasos: titulo, mensaje y botones]
             val builder = AlertDialog.Builder(context)
 
             builder.setTitle("Confirmación")
             builder.setMessage("¿Está seguro que quiere borrar?")
 
-            builder.setPositiveButton("Si"){ dialog, wich ->
+            builder.setPositiveButton("Si") { dialog, wich ->
                 eliminarDatos(item.nombrePaciente, position)
             }
-            builder.setNegativeButton("No"){ dialog, wich ->
+            builder.setNegativeButton("No") { dialog, wich ->
                 dialog.dismiss()
             }
             val dialog = builder.create()
             dialog.show()
 
         }
+
 
         holder.imgEditar.setOnClickListener {
-            //Creo mi Alerta para editar
             val context = holder.itemView.context
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.activity_actualizar, null)
+            val txtNombre_A = dialogView.findViewById<EditText>(R.id.txtNombre_A)
+            val txtEnfermedad_A = dialogView.findViewById<EditText>(R.id.txtTipoSangre_A)
+            val txtTelefono_A = dialogView.findViewById<EditText>(R.id.txtTelefono_A)
+            val txtTipoSangre_A = dialogView.findViewById<EditText>(R.id.txtEnfermedad_A)
+            val txtFechaNacimiento_A = dialogView.findViewById<EditText>(R.id.txtFechaNacimiento_A)
+            val txtHoraMedicacion_A = dialogView.findViewById<EditText>(R.id.txtHoraMedicacion_A)
+            val txtNumeroHabitacion_A = dialogView.findViewById<EditText>(R.id.txtNumeroHabitacion_A)
+            val txtNumeroCama_A = dialogView.findViewById<EditText>(R.id.txtNumeroCama_A)
+            val txtMedicamentos_A = dialogView.findViewById<EditText>(R.id.txtMedicamentos_A)
+
+
+
+            txtNombre_A.setText(item.nombrePaciente)
+            txtEnfermedad_A.setText(item.enfermedadPaciente)
+            txtTelefono_A.setText(item.telefonoPaciente)
+            txtTipoSangre_A.setText(item.tipoSangrePaciente)
+            txtFechaNacimiento_A.setText(item.fechaNacimientoPaciente)
+            txtHoraMedicacion_A.setText(item.horaAplicacionPaciente)
+            txtNumeroHabitacion_A.setText(item.numHabitacionPaciente?.toString() ?: "")
+            txtNumeroCama_A.setText(item.numCamaPaciente?.toString() ?: "")
+            txtMedicamentos_A.setText(item.medicamentosPaciente)
 
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Actualizar")
+            builder.setTitle("Actualizar este Paciente")
+            builder.setView(dialogView)
 
-            //Agregarle un cuadro de texto
-            //donde el usuario va a escribir el nuevo nombre
-            val cuadroTexto = EditText(context)
-            cuadroTexto.setHint(item.nombrePaciente)
-            builder.setView(cuadroTexto)
-
-            //Botones
-            builder.setPositiveButton("Actualizar"){
-                    dialog, wich ->
-                actualizarDato(cuadroTexto.text.toString(), item.nombrePaciente)
-            }
-            builder.setNegativeButton("Cancelar"){
-                    dialog, wich ->
+            builder.setPositiveButton("Actualizar") { dialog, _ ->
+                val nombrePaciente = txtNombre_A.text.toString()
+                val tipoSangre = txtTipoSangre_A.text.toString()
+                val telefono = txtTelefono_A.text.toString()
+                val enfermedad = txtEnfermedad_A.text.toString()
+                val fechaNacimiento = txtFechaNacimiento_A.text.toString()
+                val horaMedicion = txtHoraMedicacion_A.text.toString()
+                val numeroHabitacion = txtNumeroHabitacion_A.text.toString().takeIf { it.isNotEmpty() }?.toIntOrNull()
+                val numeroCama = txtNumeroCama_A.text.toString().takeIf { it.isNotEmpty() }?.toIntOrNull()
+                val medicamentos = txtMedicamentos_A.text.toString()
+                actualizarDato(nombrePaciente, tipoSangre, telefono, enfermedad, fechaNacimiento, horaMedicion, numeroHabitacion, numeroCama, medicamentos, item.uuid, GlobalScope)
                 dialog.dismiss()
             }
+
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+
             val dialog = builder.create()
             dialog.show()
-
         }
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("Nombre", item.nombrePaciente)
+                putString("tipo_sangre", item.tipoSangrePaciente)
+                putString("telefono", item.telefonoPaciente)
+                putString("enfermedad", item.enfermedadPaciente)
+                putString("fecha_nacimiento", item.fechaNacimientoPaciente)
+                putString("hora_medicacion", item.horaAplicacionPaciente)
+                putString("numero_habitacion", item.numHabitacionPaciente)
+                putString("numero_cama", item.numCamaPaciente)
+                putString("medicamentos", item.medicamentosPaciente)
+            }
+            val navController = findNavController(holder.itemView)
+            navController.navigate(R.id.navigation_dashboard, bundle)
+        }
+    }
+    private fun findNavController(view: View): NavController {
+        val fragment = view.findFragment<Fragment>()
+        return NavHostFragment.findNavController(fragment)
     }
 
     fun setData(newData: List<tbPacientes>) {
@@ -84,19 +138,40 @@ class Adaptador(private var Data: List<tbPacientes>): RecyclerView.Adapter<ViewH
 
     //aca empiezo yo xd
 
-    fun actualizarDato(nuevoNombre: String, nombrePaciente: String){
-        GlobalScope.launch(Dispatchers.IO){
-            //1- Creo un obj de la clase conexion
+    fun actualizarDato(
+        Nombre: String,
+        TSangre: String?,
+        Telefono: String?,
+        Enfermedad: String?,
+        FechaNac: String?,
+        HoraM: String?,
+        NumHabitacion: Int?,
+        NumCama: Int?,
+        Medicamento: String?,
+        uuid: String,
+        scope: CoroutineScope
+    ) {
+        scope.launch(Dispatchers.IO) {
+            // 1- Creo un obj de la clase conexion
             val objConexion = Conexion().cadenaConexion()
 
-            //2- Creo una variable que contenga un PrepareStatement
-            val updateCancion = objConexion?.prepareStatement("update pacientes set Nombre = ? where idpaciente = ?")!!
-            updateCancion.setString(1, nuevoNombre)
-            updateCancion.setString(2, nombrePaciente)
-            updateCancion.executeUpdate()
-
-            val commit = objConexion.prepareStatement("commit")
-            commit.executeUpdate()
+            // 2- Creo una variable que contenga un PrepareStatement
+            val updatePaciente = objConexion?.prepareStatement(
+                "UPDATE pacientes SET " + "Nombre = ?, TSangre = ?, telefono = ?, enfermedad = ?, " + "FechaNac = ?, HoraMedicacion = ?, NumHabitacion = ?, " + "NumCama = ?, Medicamento = ? WHERE uuid = ?"
+            )
+            updatePaciente?.apply {
+                setString(1, Nombre)
+                setString(2, TSangre)
+                setString(3, Telefono)
+                setString(4, Enfermedad)
+                setString(5, FechaNac)
+                setString(6, HoraM)
+                setObject(7, NumHabitacion)
+                setObject(8, NumCama)
+                setString(9, Medicamento)
+                setString(10, uuid)
+                executeUpdate()
+            }
 
         }
     }

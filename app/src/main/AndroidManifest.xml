@@ -15,6 +15,9 @@
         android:theme="@style/Theme.HospitalBloom"
         tools:targetApi="31">
         <activity
+            android:name=".Activity_Actualizar"
+            android:exported="false" />
+        <activity
             android:name=".itemCard"
             android:exported="false" />
         <activity

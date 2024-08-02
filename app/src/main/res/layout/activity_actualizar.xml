@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/dialog_update_paciente.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/txtNombre_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="actualizar nombre"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtTipoSangre_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="actualizar tipo de sangre"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtTelefono_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="nuevo Telefono"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtEnfermedad_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="actualizar enfermedad"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtNumeroHabitacion_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nuevo Número de Habitación"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtNumeroCama_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nuevo Número de Cama"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtMedicamentos_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="nuevo Medicamento"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtFechaNacimiento_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="nueva Fecha de Nacimiento"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtHoraMedicacion_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="nueva hora de medicación"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</LinearLayout>
