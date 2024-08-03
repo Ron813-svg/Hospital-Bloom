@@ -18,11 +18,6 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.robbielarios.ronyramirez.hospitalbloom.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-    <fragment
         android:id="@+id/detalles2"
         android:name="com.robbielarios.ronyramirez.hospitalbloom.Detalles"
         android:label="fragment_detalles"

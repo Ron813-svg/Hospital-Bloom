@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="522dp"
+        android:layout_height="610dp"
+        android:src="@drawable/button_state_normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.298" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -172,9 +184,9 @@
         android:id="@+id/btnIngresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="43dp"
-        android:background="@drawable/button_mode"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="83dp"
+        android:background="@drawable/button_mode"
         android:text="Ingresar el Paciente"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

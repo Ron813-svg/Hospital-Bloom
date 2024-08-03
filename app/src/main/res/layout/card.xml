@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="4dp"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="1dp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="15dp"
+    app:contentPadding="10dp"
+    app:cardBackgroundColor="@color/buttonNormalColor"
     tools:context=".itemCard">
 
     <LinearLayout
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
+                android:textColor="@color/white"
                 android:textSize="28sp" />
 
             <ImageView
